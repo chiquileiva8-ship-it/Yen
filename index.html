@@ -1,11 +1,10 @@
 
-    <!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Gran Desafío de Velox y Paciencia</title>
-    <!-- Fuentes infantiles amigables de Google Fonts -->
+    <title>El Gran Desafío: Aventura con Vidas y Decisiones</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,6 +14,7 @@
             --success: #06D6A0;
             --dark: #2B2D42;
             --light: #F8F9FA;
+            --danger: #EF476F;
         }
 
         body {
@@ -35,7 +35,7 @@
             background: white;
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            padding: 40px;
+            padding: 35px;
             text-align: center;
             position: relative;
             border: 6px solid white;
@@ -48,74 +48,107 @@
             to { opacity: 1; transform: scale(1); }
         }
 
+        .hud {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #F1F5F9;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .hearts {
+            color: var(--danger);
+            font-size: 1.3rem;
+        }
+
+        .help-btn {
+            background: var(--accent);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.9rem;
+            color: #7A5C00;
+            box-shadow: 0 3px 0 #d4bc43;
+            transition: all 0.1s;
+        }
+        .help-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #d4bc43; }
+
         .chapter-tag {
             display: inline-block;
             background: var(--accent);
             color: #7A5C00;
-            padding: 6px 18px;
+            padding: 5px 15px;
             border-radius: 20px;
             font-family: 'Fredoka One', cursive;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
         }
 
         h1 {
             font-family: 'Fredoka One', cursive;
             color: var(--primary);
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 0px rgba(255, 209, 102, 0.5);
         }
 
         .emoji-art {
-            font-size: 5rem;
-            margin: 15px 0;
+            font-size: 4rem;
+            margin: 10px 0;
             animation: bounce 2s infinite ease-in-out;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
 
         .story-text {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            margin: 20px 0;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 15px 0;
             font-weight: 700;
             color: #4A5568;
             text-align: justify;
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
             padding-right: 10px;
-        }
-
-        /* Estilo de scroll amigable */
-        .story-text::-webkit-scrollbar {
-            width: 8px;
-        }
-        .story-text::-webkit-scrollbar-thumb {
-            background: #cbd5e0;
-            border-radius: 4px;
         }
 
         .decision-box {
             background: #FFF9E6;
             border-left: 6px solid var(--accent);
-            padding: 15px;
+            padding: 12px;
             border-radius: 12px;
-            font-size: 1.1rem;
-            margin: 20px 0 15px 0;
+            font-size: 1.05rem;
+            margin: 15px 0;
             color: #5C4300;
             text-align: left;
             font-weight: 700;
         }
 
+        .hint-box {
+            background: #E0F7FA;
+            border-left: 6px solid #00ACC1;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            margin: 10px 0;
+            color: #006064;
+            display: none;
+            text-align: left;
+        }
+
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 15px;
         }
 
         .btn {
@@ -123,12 +156,12 @@
             background-color: var(--secondary);
             color: white;
             border: none;
-            padding: 16px 25px;
-            font-size: 1.15rem;
+            padding: 14px 20px;
+            font-size: 1.1rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 6px 0 #2082d4;
+            box-shadow: 0 5px 0 #2082d4;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -136,172 +169,209 @@
             text-align: center;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            background-color: #2395ff;
-            box-shadow: 0 9px 0 #186db4;
-        }
-
-        .btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 3px 0 #186db4;
-        }
-
-        .btn-alt {
-            background-color: var(--primary);
-            box-shadow: 0 6px 0 #cc3944;
-        }
-        .btn-alt:hover {
-            background-color: #ff424e;
-            box-shadow: 0 9px 0 #a32b34;
-        }
-
-        .btn-success {
-            background-color: var(--success);
-            box-shadow: 0 6px 0 #049c73;
-        }
-        .btn-success:hover {
-            background-color: #05b888;
-            box-shadow: 0 9px 0 #037556;
-        }
+        .btn:hover { transform: translateY(-2px); background-color: #2395ff; box-shadow: 0 7px 0 #186db4; }
+        .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #186db4; }
+        .btn-alt { background-color: var(--primary); box-shadow: 0 5px 0 #cc3944; }
+        .btn-alt:hover { background-color: #ff424e; box-shadow: 0 7px 0 #a32b34; }
+        .btn-success { background-color: var(--success); box-shadow: 0 5px 0 #049c73; }
+        .btn-success:hover { background-color: #05b888; box-shadow: 0 7px 0 #037556; }
     </style>
 </head>
 <body>
 
     <div class="story-card" id="app">
-        <!-- El contenido interactivo se renderiza aquí -->
+        <!-- Contenido dinámico -->
     </div>
 
-    <!-- Script con la lógica del cuento largo y sonidos web estables -->
     <script>
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // Estado del Juego (Vidas)
+        let vidas = 3;
 
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound(type) {
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
             const osc = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            osc.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
 
             if (type === 'click') {
                 osc.frequency.setValueAtTime(350, audioCtx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(700, audioCtx.currentTime + 0.1);
-                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.1);
-            } else if (type === 'decision') {
-                osc.frequency.setValueAtTime(250, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(450, audioCtx.currentTime + 0.2);
-                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'hurt') {
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.3);
             } else if (type === 'win') {
                 osc.frequency.setValueAtTime(400, audioCtx.currentTime);
                 osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.15);
                 osc.frequency.setValueAtTime(800, audioCtx.currentTime + 0.3);
-                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.45);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.45);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.45);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.45);
             }
         }
 
-        // Estructura de Escenas con los textos largos e inmersivos
+        // Estructura de Escenas con gestión de vidas y pistas
         const story = {
             inicio: {
-                tag: "Capítulo 1: Las Alardes de la Mañana",
-                title: "El Orgullo de la Liebre",
+                tag: "Capítulo 1: El Desafío en el Prado",
+                title: "Las Alardes de la Liebre",
                 emoji: "🐇💬🐢",
-                text: "Había una vez, en un rincón especialmente verde y luminoso del Bosque del Arroyo Fresco, una liebre llamada Velox. Velox era dueña de unas patas larguísimas, un pelaje blanco como la nieve y una habilidad insuperable para correr a saltos vertiginosos. Sin embargo, era profundamente vanidosa y se pasaba el día presumiendo ante los animales. Cansada de sus constantes alardes, la tortuga Paciencia la retó a competir en una carrera hasta la Colina de los Girasoles. Velox soltó una carcajada burlona, mientras Paciencia respondió firme: 'Guarda tus palabras hasta después de la carrera'.",
-                question: "🤔 ¿Cómo decides que inicie la aventura?",
+                text: "Velox presume todo el día de su gran velocidad, riéndose de la tortuga Paciencia. Cansada de las burlas, la tortuga la reta a una carrera hasta la Colina de los Girasoles. Velox suelta una carcajada burlona.",
+                hint: "💡 Pista del Búho: La soberbia y la prisa excesiva suelen nublar el buen juicio en una competencia larga.",
+                question: "🤔 ¿Cómo decides iniciar tu preparación para la carrera?",
                 options: [
-                    { text: "🏁 Aceptar el reto y dar la salida oficial", next: "carrera", sound: "click", style: "" },
-                    { text: "🌿 Tomar un camino alternativo de reflexión en silencio", next: "camino_silencio", sound: "decision", style: "btn-alt" }
+                    { text: "🏁 Aceptar el reto confiando ciegamente en tu velocidad explosiva", next: "carrera_salida", sound: "click", damage: 0, style: "" },
+                    { text: "🤭 Reírte en su cara y salir corriendo sin escuchar sus advertencias", next: "perder_vida_inicio", sound: "hurt", damage: 1, style: "btn-alt" }
                 ]
             },
-            camino_silencio: {
-                tag: "Camino Alternativo",
-                title: "El Valor de la Paciencia",
-                emoji: "🌿🐢🌿",
-                text: "Paciencia decidió que las burlas no merecían su energía. Siguió su camino en paz, cargando su caparazón con seguridad, demostrando que no siempre hay que competir para demostrar valía. La liebre se quedó sola presumiendo ante nadie en el prado.",
-                question: "🌟 ¡Una gran lección sobre la autoestima y la tranquilidad!",
+            perder_vida_inicio: {
+                tag: "¡Cuidado! Perdiste una vida",
+                title: "Falta de Respeto",
+                emoji: "⚠️🐇💔",
+                text: "Burlarse de los demás sin escuchar genera mal ambiente y te hace descuidar los detalles importantes del camino. ¡Has perdido un corazón por arrogancia!",
+                hint: "💡 Pista: El respeto mutuo es el primer paso para cualquier reto importante.",
+                question: "🔄 ¿Qué haces para enmendar tu actitud antes de empezar?",
                 options: [
-                    { text: "🔄 Volver al inicio de la historia", next: "inicio", sound: "win", style: "btn-success" }
+                    { text: "🏃‍♂️ Concentrarte en la carrera con más humildad", next: "carrera_salida", sound: "click", damage: 0, style: "btn-success" }
                 ]
             },
-            carrera: {
-                tag: "Capítulo 2 y 3: La Salida y el Camino",
+            carrera_salida: {
+                tag: "Capítulo 2: El Arranque",
                 title: "¡En sus marcas, listos, YA!",
                 emoji: "🐻🚩🏃💨",
-                text: "El viejo oso dio la señal de salida. Velox salió disparada como una flecha dorada y blanca, dejando a la tortuga muy atrás. Al mirar hacia atrás con soberbia, Velox pensó: '¿Por qué habrá querido competir si no tiene ninguna oportunidad contra mí?'. Confiada en su victoria, llegó a la mitad del camino y vio un gran roble milenario con una sombra muy fresca. El sol calentaba con fuerza y la liebre comenzó a sentir un cansancio pesado.",
-                question: "👀 La liebre siente mucho sueño. ¿Qué decisión tomará el lector?",
+                text: "El oso da la señal de salida. Velox sale disparada como un rayo, dejando a la tortuga muy atrás. Al mirar hacia atrás, Velox piensa que la tortuga no tiene ninguna oportunidad. El sol comienza a calentar con fuerza los senderos.",
+                hint: "💡 Pista del Búho: Gastar toda la energía en los primeros metros sin medir el desgaste físico es un grave error táctico.",
+                question: "👀 ¿Qué decisión tomas al correr a mitad del camino?",
                 options: [
-                    { text: "🌳 Opción Clásica: Quedarse a dormir una larga siesta bajo el roble", next: "sueno_profundo", sound: "decision", style: "btn-alt" },
-                    { text: "⚡ Opción Estratégica: Continuar trotando a ritmo constante sin parar", next: "ritmo_constante", sound: "click", style: "btn-success" }
+                    { text: "⚡ Seguir corriendo al máximo sin descansar ni hidratarse", next: "cansancio_extremo", sound: "hurt", damage: 1, style: "btn-alt" },
+                    { text: "💧 Reducir un poco el ritmo y buscar un tramo fresco", next: "ritmo_constante", sound: "win", damage: 0, style: "btn-success" }
+                ]
+            },
+            cansancio_extremo: {
+                tag: "Capítulo 3: El Desgaste Físico",
+                title: "¡Fatiga Muscular!",
+                emoji: "🥵🪵💤",
+                text: "Correr sin calentar ni medir tu esfuerzo ha sobrecalentado tus músculos. ¡Pierdes una vida por imprudencia física! Encuentras un gran roble milenario con una sombra muy tentadora.",
+                hint: "💡 Pista del Búho: El descanso es necesario, pero dormir profundamente en medio de una competencia es un riesgo enorme.",
+                question: "😴 ¿Qué haces bajo la sombra del roble?",
+                options: [
+                    { text: "🌳 Quedarte a dormir una siesta profunda y confiada", next: "sueno_profundo", sound: "hurt", damage: 1, style: "btn-alt" },
+                    { text: "🌿 Estirar los músculos un minuto y seguir trotando despacio", next: "meta_estrategica", sound: "win", damage: 0, style: "btn-success" }
                 ]
             },
             ritmo_constante: {
-                tag: "Camino Alternativo",
-                title: "Constancia sin Excesos",
-                emoji: "🏃✨🏆",
-                text: "Sabiendo que la confianza excesiva es mala consejera, Velox sacudió el sueño y mantuvo un trote moderado. Poco después se encontró con Paciencia en el sendero. Ambas se saludaron con respeto y terminaron trotando juntas hacia la meta, demostrando que la disciplina gana sin necesidad de descuidos.",
-                question: "🌟 ¡Excelente elección de estrategia y compañerismo!",
+                tag: "Camino de Sabiduría",
+                title: "Estrategia Inteligente",
+                emoji: "📈🏃✨",
+                text: "Al mantener un ritmo equilibrado, conservas energía y salud. Te encuentras con Paciencia, quien te saluda respetuosamente mientras avanza constante.",
+                hint: "💡 Pista del Búho: La constancia vence a la velocidad desordenada.",
+                question: "🌟 ¿Cómo abordas el tramo final hacia la colina?",
                 options: [
-                    { text: "🔄 Volver a empezar", next: "inicio", sound: "win", style: "btn-success" }
+                    { text: "🏁 Mantener el paso firme hasta cruzar la meta con honor", next: "meta_estrategica", sound: "win", damage: 0, style: "btn-success" }
                 ]
             },
             sueno_profundo: {
-                tag: "Capítulo 4: El Sueño Profundo",
-                title: "Zzz... ¡Ronquidos bajo el Sol!",
+                tag: "Capítulo 4: El Gran Descudio",
+                title: "Zzz... ¡Ronquidos Profundos!",
                 emoji: "😴🌳🐢",
-                text: "Confiada en su ventaja, Velox se acurrucó sobre el musgo fresco y se quedó profundamente dormida, soltando suaves ronquidos. Mientras tanto, la tortuga siguió caminando lento, pero sin pausa, decidida a no rendirse. Pronto, pasó silenciosamente junto a la liebre que dormía plácidamente. ¡La tortuga estaba tomando la delantera rumbo a la gran colina!",
-                question: "😱 ¿Qué debe hacer la tortuga al acercarse a la meta final?",
+                text: "Te quedaste dormida profundamente. La tortuga Paciencia caminó lento pero sin pausa, pasándote de largo mientras roncabas. Los gritos de la meta despiertan a los animales.",
+                hint: "💡 Pista del Búho: La disciplina supera al talento cuando el talento decide dormir.",
+                question: "😱 ¿Cómo reaccionas al despertar y ver que la tortuga está cerca de ganar?",
                 options: [
-                    { text: "🤫 Cruzar la meta en silencio y ganar la carrera", next: "meta_clasica", sound: "win", style: "" },
-                    { text: "🤝 Detenerse a despertar a la liebre para terminar juntas", next: "meta_amigos", sound: "win", style: "btn-success" }
+                    { text: "🏃‍♀️ Correr desesperada intentando alcanzarla", next: "meta_clasica", sound: "hurt", damage: 0, style: "btn-alt" },
+                    { text: "🤝 Aceptar la derrota con deportividad y felicitarla", next: "meta_amigos", sound: "win", damage: 0, style: "btn-success" }
                 ]
             },
             meta_clasica: {
                 tag: "Desenlace Clásico",
                 title: "¡Victoria de la Tortuga!",
                 emoji: "🎉🏆🐢",
-                text: "Los gritos de emoción de los animales despertaron a la liebre. Velox abrió los ojos, corrió desesperada, pero ya era tarde: la tortuga acababa de cruzar la meta. Moraleja: Ten una buena actitud, no te burles de los demás y sé más exitoso haciendo las cosas con constancia y disciplina que actuando de manera rápida y descuidadamente.",
-                question: "✨ ¿Qué camino deseas explorar ahora?",
+                text: "Llegaste tarde a la meta. Moraleja: Ten una buena actitud y no te burles de los demás. Puedes ser más exitoso haciendo las cosas con constancia y disciplina que actuando rápida y descuidadamente.",
+                question: "✨ ¿Quieres aprender de tus errores y volver a jugar?",
                 options: [
-                    { text: "🔄 Volver al inicio", next: "inicio", sound: "click", style: "btn-success" }
+                    { text: "🔄 Reiniciar aventura (Restaurar vidas)", next: "reiniciar", sound: "click", damage: 0, style: "btn-success" }
+                ]
+            },
+            meta_estrategica: {
+                tag: "Desenlace Victorioso",
+                title: "¡Triunfo con Inteligencia!",
+                emoji: "🌟🏆🏃",
+                text: "¡Felicidades! Ganaste la carrera combinando velocidad, estrategia y disciplina, cuidando tus recursos sin caer en la soberbia.",
+                question: "✨ ¡Excelente trabajo pedagógico!",
+                options: [
+                    { text: "🔄 Volver a jugar", next: "reiniciar", sound: "click", style: "btn-success" }
                 ]
             },
             meta_amigos: {
                 tag: "Desenlace Cooperativo",
-                title: "¡Cruzando de la Mano!",
-                emoji: "🤝🌟🎉",
-                text: "La tortuga decidió despertar a su compañera en el último tramo. Ambas llegaron a la meta juntas, compartiendo los aplausos del bosque. Aprendieron que el respeto, la empatía y el esfuerzo conjunto valen mucho más que una medalla individual.",
-                question: "💖 ¡Un final lleno de valores y compañerismo!",
+                title: "¡Empatía en el Bosque!",
+                emoji: "💖🤝🎉",
+                text: "Demostraste gran madurez al reconocer el esfuerzo de tu compañera. Las dos cruzaron unidas los últimos metros, celebrando el respeto mutuo.",
+                question: "✨ ¡Un final lleno de valores socioemocionales!",
                 options: [
-                    { text: "🔄 Volver al inicio", next: "inicio", sound: "click", style: "btn-success" }
+                    { text: "🔄 Volver a jugar", next: "reiniciar", sound: "click", style: "btn-success" }
+                ]
+            },
+            game_over: {
+                tag: "¡Juego Terminado!",
+                title: "Te has quedado sin vidas",
+                emoji: "💀💔🌲",
+                text: "La imprudencia, la soberbia y el agotamiento extremo te han vencido en el camino. Recuerda que en la educación y en la vida, la constancia y el cuidado personal son fundamentales.",
+                hint: "💡 Pista final: Analiza cada decisión antes de actuar con prisa.",
+                question: "🔄 ¿Deseas intentarlo de nuevo con una nueva estrategia?",
+                options: [
+                    { text: "❤️ Reintentar la aventura desde el inicio", next: "reiniciar", sound: "win", damage: 0, style: "btn-success" }
                 ]
             }
         };
 
-        function renderScene(sceneKey) {
+        function toggleHint() {
+            const hintBox = document.getElementById('hint-box');
+            hintBox.style.display = hintBox.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function renderScene(sceneKey, damage = 0) {
+            // Manejo de Vidas
+            if (sceneKey === 'reiniciar') {
+                vidas = 3;
+                renderScene('inicio');
+                return;
+            }
+
+            vidas -= damage;
+            if (vidas <= 0) {
+                sceneKey = 'game_over';
+                vidas = 0;
+            }
+
             const scene = story[sceneKey];
             const app = document.getElementById('app');
+
+            let heartsHTML = '❤️'.repeat(vidas) + '🤍'.repeat(3 - vidas);
 
             let buttonsHTML = '';
             scene.options.forEach(opt => {
                 let btnClass = 'btn ' + (opt.style || '');
-                buttonsHTML += `<button class="${btnClass}" onclick="playSound('${opt.sound}'); renderScene('${opt.next}')">${opt.text}</button>`;
+                buttonsHTML += `<button class="${btnClass}" onclick="playSound('${opt.sound}'); renderScene('${opt.next}', ${opt.damage})">${opt.text}</button>`;
             });
 
             app.innerHTML = `
+                <div class="hud">
+                    <div class="hearts">Vidas: ${heartsHTML}</div>
+                    <button class="help-btn" onclick="toggleHint()">🦉 Ayuda del Búho</button>
+                </div>
                 <div class="chapter-tag">${scene.tag}</div>
                 <h1>${scene.title}</h1>
                 <div class="emoji-art">${scene.emoji}</div>
                 <div class="story-text">${scene.text}</div>
+                <div class="hint-box" id="hint-box">${scene.hint}</div>
                 <div class="decision-box">${scene.question}</div>
                 <div class="btn-group">
                     ${buttonsHTML}
@@ -309,8 +379,8 @@
             `;
         }
 
-        // Inicializar la primera escena al cargar la página
-        renderScene('inicio');
+        // Inicializar al cargar
+        renderScene('inicio', 0);
     </script>
 </body>
 </html>
