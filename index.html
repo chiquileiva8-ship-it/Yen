@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Gran Desafío: La Liebre y la Tortuga</title>
+    <title>El Gran Desafío de Velox y Paciencia</title>
     <!-- Fuentes infantiles amigables -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #FF5964;
@@ -20,7 +20,7 @@
             font-family: 'Quicksand', sans-serif;
             background: linear-gradient(135deg, #a8ede0 0%, #fed6e3 100%);
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,73 +28,77 @@
             color: var(--dark);
         }
 
-        .card {
-            width: 90%;
-            max-width: 750px;
+        .story-card {
+            width: 100%;
+            max-width: 800px;
             background: white;
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            padding: 35px;
+            padding: 40px;
             text-align: center;
             position: relative;
             border: 6px solid white;
-            animation: fadeIn 0.5s ease-in-out;
+            box-sizing: border-box;
+            animation: fadeIn 0.4s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
+            from { opacity: 0; transform: scale(0.97); }
             to { opacity: 1; transform: scale(1); }
+        }
+
+        .chapter-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: #7A5C00;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
         }
 
         h1 {
             font-family: 'Fredoka One', cursive;
             color: var(--primary);
-            font-size: 2.3rem;
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 0px var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(255, 209, 102, 0.5);
         }
 
-        .stage-badge {
-            display: inline-block;
-            background: var(--accent);
-            color: #7A5C00;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
+        .emoji-art {
+            font-size: 5rem;
+            margin: 15px 0;
+            animation: bounce 2s infinite ease-in-out;
         }
 
-        .scene-emoji {
-            font-size: 5.5rem;
-            margin: 10px 0;
-            animation: float 2s infinite ease-in-out;
-        }
-
-        @keyframes float {
+        @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-10px); }
         }
 
-        p {
-            font-size: 1.3rem;
-            line-height: 1.6;
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
             margin: 20px 0;
             font-weight: 700;
             color: #4A5568;
+            text-align: justify;
         }
 
-        .question-box {
+        .decision-box {
             background: #FFF9E6;
             border-left: 6px solid var(--accent);
-            padding: 12px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 12px;
             font-size: 1.1rem;
-            margin-bottom: 20px;
+            margin: 25px 0 15px 0;
             color: #5C4300;
+            text-align: left;
+            font-weight: 700;
         }
 
-        .btn-container {
+        .btn-group {
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -107,7 +111,7 @@
             color: white;
             border: none;
             padding: 16px 25px;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -116,6 +120,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            text-align: center;
         }
 
         .btn:hover {
@@ -150,11 +155,11 @@
 </head>
 <body>
 
-    <div class="card" id="app">
-        <!-- El contenido interactivo se carga dinámicamente aquí -->
+    <div class="story-card" id="app">
+        <!-- El contenido interactivo se renderiza aquí -->
     </div>
 
-    <!-- Generador de Sonidos Sintéticos Web API (Funciona sin internet y sin bloqueos) -->
+    <!-- Script con la lógica del cuento y sonidos web estables -->
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -168,19 +173,19 @@
             gainNode.connect(audioCtx.destination);
 
             if (type === 'click') {
-                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.1);
+                osc.frequency.setValueAtTime(350, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(700, audioCtx.currentTime + 0.1);
                 gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
                 osc.start();
                 osc.stop(audioCtx.currentTime + 0.1);
-            } else if (type === 'intriga') {
-                osc.frequency.setValueAtTime(200, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.3);
+            } else if (type === 'decision') {
+                osc.frequency.setValueAtTime(250, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(450, audioCtx.currentTime + 0.2);
                 gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.3);
+                osc.stop(audioCtx.currentTime + 0.2);
             } else if (type === 'win') {
                 osc.frequency.setValueAtTime(400, audioCtx.currentTime);
                 osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.15);
@@ -192,79 +197,79 @@
             }
         }
 
-        // Estructura de Escenas con Decisiones e Intriga
+        // Estructura de Escenas Literarias e Interactivas
         const story = {
             inicio: {
-                badge: "Escena 1: El Reto",
-                title: "¡El Desafío en el Bosque!",
+                tag: "Parte 1: El Reto en el Bosque",
+                title: "El Orgullo de la Liebre",
                 emoji: "🐇💬🐢",
-                text: "La liebre presumía todo el día de su gran velocidad, riéndose de lo lento que camina la tortuga. Cansada de las burlas, la tortuga la ha retado a una carrera.",
-                question: "🤔 ¿Qué crees que debería hacer la tortuga para demostrar su valor?",
+                text: "Había una vez, en un rincón muy verde del Bosque del Arroyo Fresco, una liebre llamada Velox que se pasaba el día presumiendo de su gran velocidad. Cansada de sus constantes alardes, la tortuga Paciencia la retó a competir en una carrera hasta la Colina de los Girasoles. Velox soltó una carcajada burlona, mientras Paciencia respondió firme: 'Guarda tus palabras hasta después de la carrera'.",
+                question: "🤔 ¿Cómo decides que inicie la aventura?",
                 options: [
-                    { text: "🏁 Aceptar el reto de inmediato", next: "carrera_inicio", sound: "click", style: "" },
-                    { text: "🤫 Ignorarla y seguir caminando sola", next: "final_silencio", sound: "intriga", style: "btn-alt" }
+                    { text: "🏁 Aceptar el reto y dar la salida oficial", next: "carrera", sound: "click", style: "" },
+                    { text: "🌿 Tomar un camino alternativo de reflexión en silencio", next: "camino_silencio", sound: "decision", style: "btn-alt" }
                 ]
             },
-            final_silencio: {
-                badge: "Camino Alternativo",
-                title: "El Poder del Silencio",
+            camino_silencio: {
+                tag: "Camino Alternativo",
+                title: "El Valor de la Paciencia",
                 emoji: "🌿🐢🌿",
-                text: "La tortuga decidió no competir y seguir su propio camino con tranquilidad. La liebre se quedó sola presumiendo ante nadie. A veces, la mejor victoria es la paz mental.",
-                question: "🌟 ¿Aprendimos algo nuevo?",
+                text: "Paciencia decidió que las burlas no merecían su energía. Siguió su camino en paz, demostrando que no siempre hay que competir para demostrar valía. La liebre se quedó sola presumiendo ante nadie.",
+                question: "🌟 ¡Una gran lección sobre la autoestima!",
+                options: [
+                    { text: "🔄 Volver al inicio de la historia", next: "inicio", sound: "win", style: "btn-success" }
+                ]
+            },
+            carrera: {
+                tag: "Parte 2: El Arranque",
+                title: "¡En sus marcas, listos, YA!",
+                emoji: "🐻🚩🏃💨",
+                text: "Al día siguiente, los animales del bosque se reunieron. El oso dio la señal de salida. La liebre salió disparada como un rayo, dejando a la tortuga muy atrás. Mirando hacia atrás con soberbia, Velox pensó: '¿Por qué habrá querido competir si no tiene ninguna oportunidad?'. Confiada en su victoria, llegó a la mitad del camino y vio un gran árbol con una sombra muy fresca.",
+                question: "👀 La liebre siente mucho sueño y calor. ¿Qué camino elegirá la historia?",
+                options: [
+                    { text: "🌳 Opción Clásica: Quedarse a dormir una larga siesta", next: "sueno_profundo", sound: "decision", style: "btn-alt" },
+                    { text: "⚡ Opción Estratégica: Continuar trotando a ritmo constante sin parar", next: "ritmo_constante", sound: "click", style: "btn-success" }
+                ]
+            },
+            ritmo_constante: {
+                tag: "Camino Alternativo",
+                title: "Constancia sin Excesos",
+                emoji: "🏃✨🏆",
+                text: "Sabiendo que la confianza es peligrosa, Velox mantuvo un trote moderado. Alcanzó a la tortuga, ambas se saludaron con respeto y terminaron trotando juntas, demostrando que la disciplina gana sin necesidad de descuidos.",
+                question: "🌟 ¡Excelente elección de estrategia!",
+                options: [
+                    { text: "🔄 Volver a empezar", next: "inicio", sound: "win", style: "btn-success" }
+                ]
+            },
+            sueno_profundo: {
+                tag: "Parte 3: El Descanso",
+                title: "Zzz... ¡Ronquidos bajo el Sol!",
+                emoji: "😴🌳🐢",
+                text: "La liebre se recostó bajo el roble y se quedó profundamente dormida. Mientras tanto, la tortuga siguió caminando lento, pero sin pausa, decidida a no rendirse. Pronto, pasó silenciosamente junto a la liebre que roncaba plácidamente. ¡La tortuga estaba tomando la delantera!",
+                question: "😱 ¿Qué debe hacer la tortuga al acercarse a la meta final?",
+                options: [
+                    { text: "🤫 Cruzar la meta en silencio y ganar la carrera", next: "meta_clasica", sound: "win", style: "" },
+                    { text: "🤝 Detenerse a despertar a la liebre para terminar juntas", next: "meta_amigos", sound: "win", style: "btn-success" }
+                ]
+            },
+            meta_clasica: {
+                tag: "Desenlace Clásico",
+                title: "¡Victoria de la Tortuga!",
+                emoji: "🎉🏆🐢",
+                text: "Los gritos de emoción de los animales despertaron a la liebre. Velox abrió los ojos y vio a la tortuga cruzando la meta. Había perdido por confiada. Moraleja: Ten una buena actitud, no te burles de los demás y sé más exitoso mediante la constancia y la disciplina que con acciones rápidas y descuidadas.",
+                question: "✨ ¿Qué camino deseas explorar ahora?",
                 options: [
                     { text: "🔄 Volver al inicio", next: "inicio", sound: "click", style: "btn-success" }
                 ]
             },
-            carrera_inicio: {
-                badge: "Escena 2: ¡En sus marcas!",
-                title: "¡Comienza la Carrera!",
-                emoji: "🐻🚩🏃💨",
-                text: "El oso grita: ¡En sus marcas, listos, YA! La liebre sale disparada como un rayo y deja a la tortuga muy atrás. Al mirar atrás, la liebre piensa que tiene la victoria asegurada.",
-                question: "👀 La liebre ve un árbol fresco y tiene mucho sueño. ¿Qué decisión tomará?",
-                options: [
-                    { text: "🌳 Opción Clásica: Quedarse a dormir una siesta", next: "liebre_duerme", sound: "intriga", style: "btn-alt" },
-                    { text: "⚡ Opción Misteriosa: Soportar el sueño y correr constante", next: "liebre_sin_parar", sound: "click", style: "btn-success" }
-                ]
-            },
-            liebre_duerme: {
-                badge: "Escena 3: El Descanso",
-                title: "Zzz... ¡Ronquidos en el Bosque!",
-                emoji: "😴🌳🐢",
-                text: "La liebre se quedó profundamente dormida bajo la sombra. Mientras tanto, la tortuga avanza paso a paso, lenta pero sin pausa... ¡Y de pronto pasa junto a la liebre durmiendo!",
-                question: "😱 ¿Qué debe hacer la tortuga al ver a la liebre roncando?",
-                options: [
-                    { text: "🤫 Pasar en silencio y seguir hacia la meta", next: "meta_clasica", sound: "win", style: "" },
-                    { text: "👋 Despertarla amablemente para competir juntas", next: "meta_amigos", sound: "win", style: "btn-success" }
-                ]
-            },
-            liebre_sin_parar: {
-                badge: "Camino Alternativo",
-                title: "¡Velocidad y Constancia!",
-                emoji: "🏆🏃💨",
-                text: "Al no detenerse a dormir, la liebre mantuvo un paso firme y cruzó la meta en primer lugar, aprendiendo a valorar el esfuerzo sin confiarse.",
-                question: "🌟 ¡Excelente elección estratégica!",
-                options: [
-                    { text: "🔄 Jugar de nuevo", next: "inicio", sound: "click", style: "btn-success" }
-                ]
-            },
-            meta_clasica: {
-                badge: "Gran Final Clásico",
-                title: "¡Victoria de la Tortuga!",
-                emoji: "🎉🏆🐢",
-                text: "¡La tortuga cruza la meta! Los gritos despiertan a la liebre, que no puede creer lo que ve. Moraleja: La constancia y la disciplina vencen a la vanidad.",
-                question: "✨ ¿Te gustó este camino?",
-                options: [
-                    { text: "🔄 Volver a empezar", next: "inicio", sound: "click", style: "btn-success" }
-                ]
-            },
             meta_amigos: {
-                badge: "Gran Final Cooperativo",
+                tag: "Desenlace Cooperativo",
                 title: "¡Cruzando de la Mano!",
                 emoji: "🤝🌟🎉",
-                text: "La tortuga despertó a la liebre. Ambas llegaron a la meta juntas, celebrando que el respeto y la amistad valen mucho más que ganar compitiendo.",
-                question: "💖 ¡Un final lleno de empatía!",
+                text: "La tortuga decidió despertar a su compañera. Ambas llegaron a la meta juntas, compartiendo los aplausos del bosque. Aprendieron que el respeto, la empatía y el esfuerzo conjunto valen mucho más que una medalla individual.",
+                question: "💖 ¡Un final lleno de valores y compañerismo!",
                 options: [
-                    { text: "🔄 Volver a empezar", next: "inicio", sound: "click", style: "btn-success" }
+                    { text: "🔄 Volver al inicio", next: "inicio", sound: "click", style: "btn-success" }
                 ]
             }
         };
@@ -280,18 +285,18 @@
             });
 
             app.innerHTML = `
-                <div class="stage-badge">${scene.badge}</div>
+                <div class="chapter-tag">${scene.tag}</div>
                 <h1>${scene.title}</h1>
-                <div class="scene-emoji">${scene.emoji}</div>
-                <p>${scene.text}</p>
-                <div class="question-box">${scene.question}</div>
-                <div class="btn-container">
+                <div class="emoji-art">${scene.emoji}</div>
+                <div class="story-text">${scene.text}</div>
+                <div class="decision-box">${scene.question}</div>
+                <div class="btn-group">
                     ${buttonsHTML}
                 </div>
             `;
         }
 
-        // Cargar la primera escena al abrir la página
+        // Inicializar la primera escena
         renderScene('inicio');
     </script>
 </body>
