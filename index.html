@@ -1,10 +1,9 @@
-
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Gran Desafío: Aventura con Vidas y Decisiones</title>
+    <title>El Gran Desafío: Aventura de 10 Niveles</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,13 +14,14 @@
             --dark: #2B2D42;
             --light: #F8F9FA;
             --danger: #EF476F;
+            --owl-bg: #E0F7FA;
         }
 
         body {
             font-family: 'Quicksand', sans-serif;
             background: linear-gradient(135deg, #a8ede0 0%, #fed6e3 100%);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,12 +35,12 @@
             background: white;
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            padding: 35px;
+            padding: 30px;
             text-align: center;
             position: relative;
             border: 6px solid white;
             box-sizing: border-box;
-            animation: fadeIn 0.4s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -55,13 +55,21 @@
             background: #F1F5F9;
             padding: 10px 20px;
             border-radius: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-family: 'Fredoka One', cursive;
         }
 
         .hearts {
             color: var(--danger);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+        }
+
+        .level-indicator {
+            background: var(--secondary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
         }
 
         .help-btn {
@@ -82,58 +90,58 @@
             display: inline-block;
             background: var(--accent);
             color: #7A5C00;
-            padding: 5px 15px;
+            padding: 4px 14px;
             border-radius: 20px;
             font-family: 'Fredoka One', cursive;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
         }
 
         h1 {
             font-family: 'Fredoka One', cursive;
             color: var(--primary);
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 0px rgba(255, 209, 102, 0.5);
         }
 
         .emoji-art {
-            font-size: 4rem;
-            margin: 10px 0;
+            font-size: 3.8rem;
+            margin: 5px 0;
             animation: bounce 2s infinite ease-in-out;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-6px); }
         }
 
         .story-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin: 15px 0;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 10px 0;
             font-weight: 700;
             color: #4A5568;
             text-align: justify;
-            max-height: 250px;
+            max-height: 200px;
             overflow-y: auto;
-            padding-right: 10px;
+            padding-right: 8px;
         }
 
         .decision-box {
             background: #FFF9E6;
             border-left: 6px solid var(--accent);
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 1.05rem;
-            margin: 15px 0;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin: 12px 0;
             color: #5C4300;
             text-align: left;
             font-weight: 700;
         }
 
         .hint-box {
-            background: #E0F7FA;
+            background: var(--owl-bg);
             border-left: 6px solid #00ACC1;
             padding: 10px;
             border-radius: 10px;
@@ -142,13 +150,14 @@
             color: #006064;
             display: none;
             text-align: left;
+            font-weight: 700;
         }
 
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .btn {
@@ -156,37 +165,37 @@
             background-color: var(--secondary);
             color: white;
             border: none;
-            padding: 14px 20px;
-            font-size: 1.1rem;
+            padding: 12px 18px;
+            font-size: 1.05rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 5px 0 #2082d4;
+            box-shadow: 0 4px 0 #2082d4;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             text-align: center;
         }
 
-        .btn:hover { transform: translateY(-2px); background-color: #2395ff; box-shadow: 0 7px 0 #186db4; }
+        .btn:hover { transform: translateY(-2px); background-color: #2395ff; box-shadow: 0 6px 0 #186db4; }
         .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #186db4; }
-        .btn-alt { background-color: var(--primary); box-shadow: 0 5px 0 #cc3944; }
-        .btn-alt:hover { background-color: #ff424e; box-shadow: 0 7px 0 #a32b34; }
-        .btn-success { background-color: var(--success); box-shadow: 0 5px 0 #049c73; }
-        .btn-success:hover { background-color: #05b888; box-shadow: 0 7px 0 #037556; }
+        .btn-alt { background-color: var(--primary); box-shadow: 0 4px 0 #cc3944; }
+        .btn-alt:hover { background-color: #ff424e; box-shadow: 0 6px 0 #a32b34; }
+        .btn-success { background-color: var(--success); box-shadow: 0 4px 0 #049c73; }
+        .btn-success:hover { background-color: #05b888; box-shadow: 0 6px 0 #037556; }
     </style>
 </head>
 <body>
 
     <div class="story-card" id="app">
-        <!-- Contenido dinámico -->
+        <!-- Renderizado dinámico -->
     </div>
 
     <script>
-        // Estado del Juego (Vidas)
         let vidas = 3;
 
+        // Sistema de audio web sin bloqueos externos
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound(type) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -217,117 +226,228 @@
             }
         }
 
-        // Estructura de Escenas con gestión de vidas y pistas
+        // Estructura ramificada extendida a 10 niveles completos
         const story = {
-            inicio: {
-                tag: "Capítulo 1: El Desafío en el Prado",
+            nivel1: {
+                level: 1,
+                tag: "Nivel 1: El Desafío en el Prado",
                 title: "Las Alardes de la Liebre",
                 emoji: "🐇💬🐢",
-                text: "Velox presume todo el día de su gran velocidad, riéndose de la tortuga Paciencia. Cansada de las burlas, la tortuga la reta a una carrera hasta la Colina de los Girasoles. Velox suelta una carcajada burlona.",
-                hint: "💡 Pista del Búho: La soberbia y la prisa excesiva suelen nublar el buen juicio en una competencia larga.",
-                question: "🤔 ¿Cómo decides iniciar tu preparación para la carrera?",
+                text: "Velox presume todo el día de su gran velocidad, riéndose de la tortuga Paciencia. Cansada de las burlas, la tortuga la reta a una carrera hasta la Colina de los Girasoles. Velox suelta una carcajada burlona y acepta sin pensar.",
+                hint: "🦉 Búho Sabio: Aceptar un reto sin evaluar tus propias debilidades físicas y mentales es un riesgo innecesario.",
+                question: "🤔 ¿Cómo decides iniciar tu preparación previa a la carrera?",
                 options: [
-                    { text: "🏁 Aceptar el reto confiando ciegamente en tu velocidad explosiva", next: "carrera_salida", sound: "click", damage: 0, style: "" },
-                    { text: "🤭 Reírte en su cara y salir corriendo sin escuchar sus advertencias", next: "perder_vida_inicio", sound: "hurt", damage: 1, style: "btn-alt" }
+                    { text: "🏁 Aceptar confiado sin calentar músculos", next: "nivel2_prisa", sound: "click", damage: 0 },
+                    { text: "🤭 Burlarte en voz alta y salir corriendo arrogante", next: "perder_vida_1", sound: "hurt", damage: 1 }
                 ]
             },
-            perder_vida_inicio: {
-                tag: "¡Cuidado! Perdiste una vida",
+            perder_vida_1: {
+                level: 1,
+                tag: "¡Penalización por Arrogancia!",
                 title: "Falta de Respeto",
                 emoji: "⚠️🐇💔",
-                text: "Burlarse de los demás sin escuchar genera mal ambiente y te hace descuidar los detalles importantes del camino. ¡Has perdido un corazón por arrogancia!",
-                hint: "💡 Pista: El respeto mutuo es el primer paso para cualquier reto importante.",
-                question: "🔄 ¿Qué haces para enmendar tu actitud antes de empezar?",
+                text: "Burlarte de los demás genera un ambiente hostil y te hace descuidar los detalles importantes. ¡Pierdes 1 vida por soberbia!",
+                hint: "🦉 Búho Sabio: El respeto mutuo es el primer paso para cualquier aprendizaje.",
+                question: "🔄 ¿Cómo corriges tu actitud para continuar?",
                 options: [
-                    { text: "🏃‍♂️ Concentrarte en la carrera con más humildad", next: "carrera_salida", sound: "click", damage: 0, style: "btn-success" }
+                    { text: "🏃‍♂️ Respirar hondo y concentrarte en la carrera con humildad", next: "nivel2_prisa", sound: "click", damage: 0 }
                 ]
             },
-            carrera_salida: {
-                tag: "Capítulo 2: El Arranque",
+            nivel2_prisa: {
+                level: 2,
+                tag: "Nivel 2: La Línea de Salida",
                 title: "¡En sus marcas, listos, YA!",
                 emoji: "🐻🚩🏃💨",
-                text: "El oso da la señal de salida. Velox sale disparada como un rayo, dejando a la tortuga muy atrás. Al mirar hacia atrás, Velox piensa que la tortuga no tiene ninguna oportunidad. El sol comienza a calentar con fuerza los senderos.",
-                hint: "💡 Pista del Búho: Gastar toda la energía en los primeros metros sin medir el desgaste físico es un grave error táctico.",
-                question: "👀 ¿Qué decisión tomas al correr a mitad del camino?",
+                text: "El viejo oso árbitro grita la salida. Velox sale disparada como un rayo, dejando a la tortuga muy atrás envuelta en una nube de polvo. Al mirar atrás, Velox se siente intocable.",
+                hint: "🦉 Búho Sabio: La velocidad explosiva sin una estrategia de resistencia agota las reservas de energía rápidamente.",
+                question: "👀 ¿Qué táctica de carrera implementas en este tramo?",
                 options: [
-                    { text: "⚡ Seguir corriendo al máximo sin descansar ni hidratarse", next: "cansancio_extremo", sound: "hurt", damage: 1, style: "btn-alt" },
-                    { text: "💧 Reducir un poco el ritmo y buscar un tramo fresco", next: "ritmo_constante", sound: "win", damage: 0, style: "btn-success" }
+                    { text: "⚡ Correr al 100% de tu velocidad sin frenar jamás", next: "nivel3_fatiga", sound: "hurt", damage: 1 },
+                    { text: "💧 Mantener un ritmo rápido pero controlado", next: "nivel3_control", sound: "win", damage: 0 }
                 ]
             },
-            cansancio_extremo: {
-                tag: "Capítulo 3: El Desgaste Físico",
+            nivel3_fatiga: {
+                level: 3,
+                tag: "Nivel 3: El Desgaste Temprano",
                 title: "¡Fatiga Muscular!",
                 emoji: "🥵🪵💤",
-                text: "Correr sin calentar ni medir tu esfuerzo ha sobrecalentado tus músculos. ¡Pierdes una vida por imprudencia física! Encuentras un gran roble milenario con una sombra muy tentadora.",
-                hint: "💡 Pista del Búho: El descanso es necesario, pero dormir profundamente en medio de una competencia es un riesgo enorme.",
-                question: "😴 ¿Qué haces bajo la sombra del roble?",
+                text: "Correr sin calentar ni medir tu esfuerzo ha sobrecalentado tus músculos. ¡Pierdes 1 vida por imprudencia física! El sol del mediodía quema con fuerza.",
+                hint: "🦉 Búho Sabio: El cuerpo humano y animal necesita pausas activas para rendir a largo plazo.",
+                question: "☀️ El calor aumenta. ¿Qué decides hacer?",
                 options: [
-                    { text: "🌳 Quedarte a dormir una siesta profunda y confiada", next: "sueno_profundo", sound: "hurt", damage: 1, style: "btn-alt" },
-                    { text: "🌿 Estirar los músculos un minuto y seguir trotando despacio", next: "meta_estrategica", sound: "win", damage: 0, style: "btn-success" }
+                    { text: "🌳 Seguir corriendo deshidratado hasta desmayarte", next: "nivel4_colapso", sound: "hurt", damage: 1 },
+                    { text: "🌿 Detenerse un instante a buscar agua en el arroyo", next: "nivel4_arroyo", sound: "win", damage: 0 }
                 ]
             },
-            ritmo_constante: {
-                tag: "Camino de Sabiduría",
-                title: "Estrategia Inteligente",
+            nivel3_control: {
+                level: 3,
+                tag: "Nivel 3: Zona de Control",
+                title: "Respiración y Ritmo",
                 emoji: "📈🏃✨",
-                text: "Al mantener un ritmo equilibrado, conservas energía y salud. Te encuentras con Paciencia, quien te saluda respetuosamente mientras avanza constante.",
-                hint: "💡 Pista del Búho: La constancia vence a la velocidad desordenada.",
-                question: "🌟 ¿Cómo abordas el tramo final hacia la colina?",
+                text: "Al conservar tu energía, tus pulmones trabajan de forma óptima. Logras mantener una ventaja limpia sobre el sendero principal sin descuidar tu salud física.",
+                hint: "🦉 Búho Sabio: La inteligencia táctica supera siempre a la fuerza bruta.",
+                question: "🌲 Te acercas a una bifurcación de caminos en el bosque.",
                 options: [
-                    { text: "🏁 Mantener el paso firme hasta cruzar la meta con honor", next: "meta_estrategica", sound: "win", damage: 0, style: "btn-success" }
+                    { text: "🛤️ Tomar el sendero de piedra seguro", next: "nivel4_sendero_seguro", sound: "win", damage: 0 }
                 ]
             },
-            sueno_profundo: {
-                tag: "Capítulo 4: El Gran Descudio",
-                title: "Zzz... ¡Ronquidos Profundos!",
-                emoji: "😴🌳🐢",
-                text: "Te quedaste dormida profundamente. La tortuga Paciencia caminó lento pero sin pausa, pasándote de largo mientras roncabas. Los gritos de la meta despiertan a los animales.",
-                hint: "💡 Pista del Búho: La disciplina supera al talento cuando el talento decide dormir.",
-                question: "😱 ¿Cómo reaccionas al despertar y ver que la tortuga está cerca de ganar?",
+            nivel4_colapso: {
+                level: 4,
+                tag: "Nivel 4: Tropiezo en la Ruta",
+                title: "¡Pérdida de Equilibrio!",
+                emoji: "🪵💥😵",
+                text: "El agotamiento extremo te hace tropezar con una raíz oculta. Pierdes tiempo valioso y te golpeas una pata. ¡Pierdes otra vida!",
+                hint: "🦉 Búho Sabio: El cuerpo avisa cuando necesita atención; ignorarlo trae consecuencias.",
+                question: "🩹 ¿Cómo te repones del golpe?",
                 options: [
-                    { text: "🏃‍♀️ Correr desesperada intentando alcanzarla", next: "meta_clasica", sound: "hurt", damage: 0, style: "btn-alt" },
-                    { text: "🤝 Aceptar la derrota con deportividad y felicitarla", next: "meta_amigos", sound: "win", damage: 0, style: "btn-success" }
+                    { text: "🚶 Cojear un poco pero continuar con determinación", next: "nivel5_cruce", sound: "click", damage: 0 }
                 ]
             },
-            meta_clasica: {
-                tag: "Desenlace Clásico",
-                title: "¡Victoria de la Tortuga!",
-                emoji: "🎉🏆🐢",
-                text: "Llegaste tarde a la meta. Moraleja: Ten una buena actitud y no te burles de los demás. Puedes ser más exitoso haciendo las cosas con constancia y disciplina que actuando rápida y descuidadamente.",
-                question: "✨ ¿Quieres aprender de tus errores y volver a jugar?",
+            nivel4_arroyo: {
+                level: 4,
+                tag: "Nivel 4: Hidratación",
+                title: "Refresco en el Arroyo",
+                emoji: "💧🐸🌿",
+                text: "Bebes agua fresca del arroyo y recuperas vitalidad. Notas que la tortuga Paciencia sigue avanzando a lo lejos con su paso constante e inalterable.",
+                hint: "🦉 Búho Sabio: Un descanso oportuno evita errores catastróficos.",
+                question: "🐢 ¿Cómo reaccionas al ver la constancia de la tortuga?",
                 options: [
-                    { text: "🔄 Reiniciar aventura (Restaurar vidas)", next: "reiniciar", sound: "click", damage: 0, style: "btn-success" }
+                    { text: "🏃‍♂️ Acelerar el paso con respeto por su esfuerzo", next: "nivel5_cruce", sound: "win", damage: 0 }
                 ]
             },
-            meta_estrategica: {
-                tag: "Desenlace Victorioso",
-                title: "¡Triunfo con Inteligencia!",
-                emoji: "🌟🏆🏃",
-                text: "¡Felicidades! Ganaste la carrera combinando velocidad, estrategia y disciplina, cuidando tus recursos sin caer en la soberbia.",
-                question: "✨ ¡Excelente trabajo pedagógico!",
+            nivel4_sendero_seguro: {
+                level: 4,
+                tag: "Nivel 4: Camino Elevado",
+                title: "La Colina de los Vientos",
+                emoji: "💨⛰️🌲",
+                text: "El sendero seguro te ofrece una brisa fresca que mantiene tu mente despejada. La tortuga viene un poco más atrás, pero tú llevas el control absoluto.",
+                hint: "🦉 Búho Sabio: La prevención es la mejor aliada del éxito.",
+                question: "🧭 ¿Continuamos por la ruta establecida?",
                 options: [
-                    { text: "🔄 Volver a jugar", next: "reiniciar", sound: "click", style: "btn-success" }
+                    { text: "➡️ Seguir avanzando firmemente hacia el nivel 5", next: "nivel5_cruce", sound: "win", damage: 0 }
                 ]
             },
-            meta_amigos: {
-                tag: "Desenlace Cooperativo",
-                title: "¡Empatía en el Bosque!",
-                emoji: "💖🤝🎉",
-                text: "Demostraste gran madurez al reconocer el esfuerzo de tu compañera. Las dos cruzaron unidas los últimos metros, celebrando el respeto mutuo.",
-                question: "✨ ¡Un final lleno de valores socioemocionales!",
+            nivel5_cruce: {
+                level: 5,
+                tag: "Nivel 5: La Encrucijada",
+                title: "El Puente de Madera",
+                emoji: "🌉🪵🦉",
+                text: "Llegas a la mitad del recorrido. Hay un puente de madera viejo sobre un barranco. Un cartel indica que la madera está húmeda y resbalosa.",
+                hint: "🦉 Búho Sabio: Analiza los riesgos ambientales antes de tomar decisiones apresuradas.",
+                question: "⚠️ ¿Cómo cruzas el puente?",
                 options: [
-                    { text: "🔄 Volver a jugar", next: "reiniciar", sound: "click", style: "btn-success" }
+                    { text: "🏃 Cruzar corriendo a toda velocidad para presumir", next: "nivel6_caida", sound: "hurt", damage: 1 },
+                    { text: "🚶 Caminar con cautela y paso firme paso a paso", next: "nivel6_puente_superado", sound: "win", damage: 0 }
+                ]
+            },
+            nivel6_caida: {
+                level: 6,
+                tag: "Nivel 6: Accidente",
+                title: "¡Resbalón y Caída!",
+                emoji: "💦🪵😱",
+                text: "La prisa te hizo resbalar en el puente húmedo. Caíste a los matorrales y perdiste una vida. ¡Cuidado con la soberbia!",
+                hint: "🦉 Búho Sabio: Las prisas nunca dejan buenos resultados.",
+                question: "🌿 ¿Cómo sales de los matorrales?",
+                options: [
+                    { text: "🧗 Escalar con esfuerzo y retomar el sendero principal", next: "nivel7_bosque_esponjoso", sound: "click", damage: 0 }
+                ]
+            },
+            nivel6_puente_superado: {
+                level: 6,
+                tag: "Nivel 6: Éxito en el Puente",
+                title: "Paso Seguro",
+                emoji: "🌉✨👍",
+                text: "Cruzaste el puente con inteligencia y precaución. Conservas todas tus energías y tu ventaja sobre el mapa del bosque.",
+                hint: "🦉 Búho Sabio: La paciencia salva vidas y carreras.",
+                question: "🌲 ¡Excelente manejo del riesgo! Pasamos al siguiente nivel.",
+                options: [
+                    { text: "➡️ Avanzar al Bosque Esponjoso", next: "nivel7_bosque_esponjoso", sound: "win", damage: 0 }
+                ]
+            },
+            nivel7_bosque_esponjoso: {
+                level: 7,
+                tag: "Nivel 7: El Bosque de la Sombra",
+                title: "El Árbol Tentador",
+                emoji: "😴🌳🪵",
+                text: "Llegas al famoso roble milenario. Su sombra es increíblemente fresca y agradable. El silencio del bosque invita a cerrar los ojos un momento.",
+                hint: "🦉 Búho Sabio: El descanso es salud, pero dormir en medio de una competencia activa es la trampa clásica de la soberbia.",
+                question: "💤 ¿Qué haces al llegar bajo la sombra del roble?",
+                options: [
+                    { text: "🛌 Quedarse a dormir una larga siesta confiada", next: "nivel8_sueno_profundo", sound: "hurt", damage: 1 },
+                    { text: "🍃 Respirar el aire fresco y seguir de largo sin parar", next: "nivel8_sin_parar", sound: "win", damage: 0 }
+                ]
+            },
+            nivel8_sueno_profundo: {
+                level: 8,
+                tag: "Nivel 8: El Gran Descudio",
+                title: "¡Ronquidos y Desventaja!",
+                emoji: "😴💤🐢",
+                text: "Te quedaste dormida profundamente. Mientras roncabas, la tortuga Paciencia caminó lenta, pero sin pausa, y te pasó de largo silenciosamente. ¡La tortuga va ganando!",
+                hint: "🦉 Búho Sabio: Quien se duerme en sus laureles pierde el terreno ganado.",
+                question: "😱 Despiertas sobresaltada al oír gritos lejanos. ¿Cómo reaccionas?",
+                options: [
+                    { text: "🏃‍♀️ Correr desesperada sin mirar el terreno", next: "nivel9_trampa_barro", sound: "hurt", damage: 1 },
+                    { text: "🐾 Concentrarte en recuperar terreno con técnica", next: "nivel9_carrera_final", sound: "win", damage: 0 }
+                ]
+            },
+            nivel8_sin_parar: {
+                level: 8,
+                tag: "Nivel 8: La Recta Sabia",
+                title: "Constancia Pura",
+                emoji: "🏃✨🥇",
+                text: "Evitaste la trampa del sueño. Mantienes el liderazgo y te acercas a la recta final de la gran Colina de los Girasoles.",
+                hint: "🦉 Búho Sabio: La disciplina vence a la vanidad.",
+                question: "🌻 ¡Estamos a dos niveles de la victoria!",
+                options: [
+                    { text: "➡️ Entrar al Nivel 9 con firmeza", next: "nivel9_carrera_final", sound: "win", damage: 0 }
+                ]
+            },
+            nivel9_trampa_barro: {
+                level: 9,
+                tag: "Nivel 9: Obstáculo Final",
+                title: "El Lodazal",
+                emoji: "🌧️🟤🏃",
+                text: "Por correr a toda prisa sin mirar, caíste en un lodazal espeso. Tus patas se hunden y te cuesta avanzar. ¡Pierdes una vida!",
+                hint: "🦉 Búho Sabio: La prisa ciega al caminante ante los peligros del terreno.",
+                question: "🥾 ¿Cómo sales del lodo?",
+                options: [
+                    { text: "👣 Impulsarte con paciencia hacia el terreno firme", next: "nivel10_meta", sound: "click", damage: 0 }
+                ]
+            },
+            nivel9_carrera_final: {
+                level: 9,
+                tag: "Nivel 9: La Recta Final",
+                title: "Duelo en la Colina",
+                emoji: "⛰️🏃🐢🌻",
+                text: "Te encuentras cerca de la cima. La tortuga Paciencia sube constante por un lado y tú por el otro. ¡Es el momento definitivo de la competencia!",
+                hint: "🦉 Búho Sabio: El final de una gran meta exige tu máximo enfoque.",
+                question: "🏁 ¿Cómo afrontas los últimos metros?",
+                options: [
+                    { text: "🏃‍♂️ Dar el último esfuerzo con disciplina y respeto", next: "nivel10_meta", sound: "win", damage: 0 }
+                ]
+            },
+            nivel10_meta: {
+                level: 10,
+                tag: "Nivel 10: Gran Final",
+                title: "¡Línea de Meta!",
+                emoji: "🎉🏆🌻",
+                text: "¡Has llegado al final de los 10 niveles! Has experimentado las consecuencias de tus decisiones, el valor de la constancia y el peligro de la soberbia.",
+                hint: "🦉 Búho Sabio: ¡Felicidades por completar la travesía educativa!",
+                question: "🌟 ¿Qué moraleja te llevas de esta gran aventura?",
+                options: [
+                    { text: "🏆 ¡Celebrar el triunfo de la disciplina y reiniciar juego!", next: "reiniciar", sound: "win", damage: 0 }
                 ]
             },
             game_over: {
+                level: 10,
                 tag: "¡Juego Terminado!",
                 title: "Te has quedado sin vidas",
                 emoji: "💀💔🌲",
-                text: "La imprudencia, la soberbia y el agotamiento extremo te han vencido en el camino. Recuerda que en la educación y en la vida, la constancia y el cuidado personal son fundamentales.",
-                hint: "💡 Pista final: Analiza cada decisión antes de actuar con prisa.",
-                question: "🔄 ¿Deseas intentarlo de nuevo con una nueva estrategia?",
+                text: "La prisa excesiva, la falta de respeto y las malas decisiones te han agotado por completo en el camino. Recuerda que la constancia y la prudencia son indispensables.",
+                hint: "🦉 Búho Sabio: Analiza las pistas en cada nivel antes de tomar decisiones apresuradas.",
+                question: "🔄 ¿Deseas reintentar el recorrido completo?",
                 options: [
-                    { text: "❤️ Reintentar la aventura desde el inicio", next: "reiniciar", sound: "win", damage: 0, style: "btn-success" }
+                    { text: "❤️ Reintentar desde el Nivel 1 (Restaurar Vidas)", next: "reiniciar", sound: "click", damage: 0 }
                 ]
             }
         };
@@ -338,10 +458,9 @@
         }
 
         function renderScene(sceneKey, damage = 0) {
-            // Manejo de Vidas
             if (sceneKey === 'reiniciar') {
                 vidas = 3;
-                renderScene('inicio');
+                renderScene('nivel1', 0);
                 return;
             }
 
@@ -359,12 +478,13 @@
             let buttonsHTML = '';
             scene.options.forEach(opt => {
                 let btnClass = 'btn ' + (opt.style || '');
-                buttonsHTML += `<button class="${btnClass}" onclick="playSound('${opt.sound}'); renderScene('${opt.next}', ${opt.damage})">${opt.text}</button>`;
+                buttonsHTML += `<button class="${btnClass}" onclick="playSound('${opt.sound}'); renderScene('${opt.next}', ${opt.damage || 0})">${opt.text}</button>`;
             });
 
             app.innerHTML = `
                 <div class="hud">
                     <div class="hearts">Vidas: ${heartsHTML}</div>
+                    <div class="level-indicator">Nivel ${scene.level} / 10</div>
                     <button class="help-btn" onclick="toggleHint()">🦉 Ayuda del Búho</button>
                 </div>
                 <div class="chapter-tag">${scene.tag}</div>
@@ -379,9 +499,10 @@
             `;
         }
 
-        // Inicializar al cargar
-        renderScene('inicio', 0);
+        // Iniciar en el Nivel 1
+        renderScene('nivel1', 0);
     </script>
 </body>
 </html>
+
 
