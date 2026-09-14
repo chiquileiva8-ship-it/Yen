@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Gran Desafío de Velox y Paciencia</title>
-    <!-- Fuentes infantiles amigables -->
+    <!-- Fuentes infantiles amigables de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,7 +31,7 @@
 
         .story-card {
             width: 100%;
-            max-width: 800px;
+            max-width: 850px;
             background: white;
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
@@ -78,12 +79,24 @@
         }
 
         .story-text {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             line-height: 1.8;
             margin: 20px 0;
             font-weight: 700;
             color: #4A5568;
             text-align: justify;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Estilo de scroll amigable */
+        .story-text::-webkit-scrollbar {
+            width: 8px;
+        }
+        .story-text::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 4px;
         }
 
         .decision-box {
@@ -92,7 +105,7 @@
             padding: 15px;
             border-radius: 12px;
             font-size: 1.1rem;
-            margin: 25px 0 15px 0;
+            margin: 20px 0 15px 0;
             color: #5C4300;
             text-align: left;
             font-weight: 700;
@@ -159,7 +172,7 @@
         <!-- El contenido interactivo se renderiza aquí -->
     </div>
 
-    <!-- Script con la lógica del cuento y sonidos web estables -->
+    <!-- Script con la lógica del cuento largo y sonidos web estables -->
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -197,13 +210,13 @@
             }
         }
 
-        // Estructura de Escenas Literarias e Interactivas
+        // Estructura de Escenas con los textos largos e inmersivos
         const story = {
             inicio: {
-                tag: "Parte 1: El Reto en el Bosque",
+                tag: "Capítulo 1: Las Alardes de la Mañana",
                 title: "El Orgullo de la Liebre",
                 emoji: "🐇💬🐢",
-                text: "Había una vez, en un rincón muy verde del Bosque del Arroyo Fresco, una liebre llamada Velox que se pasaba el día presumiendo de su gran velocidad. Cansada de sus constantes alardes, la tortuga Paciencia la retó a competir en una carrera hasta la Colina de los Girasoles. Velox soltó una carcajada burlona, mientras Paciencia respondió firme: 'Guarda tus palabras hasta después de la carrera'.",
+                text: "Había una vez, en un rincón especialmente verde y luminoso del Bosque del Arroyo Fresco, una liebre llamada Velox. Velox era dueña de unas patas larguísimas, un pelaje blanco como la nieve y una habilidad insuperable para correr a saltos vertiginosos. Sin embargo, era profundamente vanidosa y se pasaba el día presumiendo ante los animales. Cansada de sus constantes alardes, la tortuga Paciencia la retó a competir en una carrera hasta la Colina de los Girasoles. Velox soltó una carcajada burlona, mientras Paciencia respondió firme: 'Guarda tus palabras hasta después de la carrera'.",
                 question: "🤔 ¿Cómo decides que inicie la aventura?",
                 options: [
                     { text: "🏁 Aceptar el reto y dar la salida oficial", next: "carrera", sound: "click", style: "" },
@@ -214,20 +227,20 @@
                 tag: "Camino Alternativo",
                 title: "El Valor de la Paciencia",
                 emoji: "🌿🐢🌿",
-                text: "Paciencia decidió que las burlas no merecían su energía. Siguió su camino en paz, demostrando que no siempre hay que competir para demostrar valía. La liebre se quedó sola presumiendo ante nadie.",
-                question: "🌟 ¡Una gran lección sobre la autoestima!",
+                text: "Paciencia decidió que las burlas no merecían su energía. Siguió su camino en paz, cargando su caparazón con seguridad, demostrando que no siempre hay que competir para demostrar valía. La liebre se quedó sola presumiendo ante nadie en el prado.",
+                question: "🌟 ¡Una gran lección sobre la autoestima y la tranquilidad!",
                 options: [
                     { text: "🔄 Volver al inicio de la historia", next: "inicio", sound: "win", style: "btn-success" }
                 ]
             },
             carrera: {
-                tag: "Parte 2: El Arranque",
+                tag: "Capítulo 2 y 3: La Salida y el Camino",
                 title: "¡En sus marcas, listos, YA!",
                 emoji: "🐻🚩🏃💨",
-                text: "Al día siguiente, los animales del bosque se reunieron. El oso dio la señal de salida. La liebre salió disparada como un rayo, dejando a la tortuga muy atrás. Mirando hacia atrás con soberbia, Velox pensó: '¿Por qué habrá querido competir si no tiene ninguna oportunidad?'. Confiada en su victoria, llegó a la mitad del camino y vio un gran árbol con una sombra muy fresca.",
-                question: "👀 La liebre siente mucho sueño y calor. ¿Qué camino elegirá la historia?",
+                text: "El viejo oso dio la señal de salida. Velox salió disparada como una flecha dorada y blanca, dejando a la tortuga muy atrás. Al mirar hacia atrás con soberbia, Velox pensó: '¿Por qué habrá querido competir si no tiene ninguna oportunidad contra mí?'. Confiada en su victoria, llegó a la mitad del camino y vio un gran roble milenario con una sombra muy fresca. El sol calentaba con fuerza y la liebre comenzó a sentir un cansancio pesado.",
+                question: "👀 La liebre siente mucho sueño. ¿Qué decisión tomará el lector?",
                 options: [
-                    { text: "🌳 Opción Clásica: Quedarse a dormir una larga siesta", next: "sueno_profundo", sound: "decision", style: "btn-alt" },
+                    { text: "🌳 Opción Clásica: Quedarse a dormir una larga siesta bajo el roble", next: "sueno_profundo", sound: "decision", style: "btn-alt" },
                     { text: "⚡ Opción Estratégica: Continuar trotando a ritmo constante sin parar", next: "ritmo_constante", sound: "click", style: "btn-success" }
                 ]
             },
@@ -235,17 +248,17 @@
                 tag: "Camino Alternativo",
                 title: "Constancia sin Excesos",
                 emoji: "🏃✨🏆",
-                text: "Sabiendo que la confianza es peligrosa, Velox mantuvo un trote moderado. Alcanzó a la tortuga, ambas se saludaron con respeto y terminaron trotando juntas, demostrando que la disciplina gana sin necesidad de descuidos.",
-                question: "🌟 ¡Excelente elección de estrategia!",
+                text: "Sabiendo que la confianza excesiva es mala consejera, Velox sacudió el sueño y mantuvo un trote moderado. Poco después se encontró con Paciencia en el sendero. Ambas se saludaron con respeto y terminaron trotando juntas hacia la meta, demostrando que la disciplina gana sin necesidad de descuidos.",
+                question: "🌟 ¡Excelente elección de estrategia y compañerismo!",
                 options: [
                     { text: "🔄 Volver a empezar", next: "inicio", sound: "win", style: "btn-success" }
                 ]
             },
             sueno_profundo: {
-                tag: "Parte 3: El Descanso",
+                tag: "Capítulo 4: El Sueño Profundo",
                 title: "Zzz... ¡Ronquidos bajo el Sol!",
                 emoji: "😴🌳🐢",
-                text: "La liebre se recostó bajo el roble y se quedó profundamente dormida. Mientras tanto, la tortuga siguió caminando lento, pero sin pausa, decidida a no rendirse. Pronto, pasó silenciosamente junto a la liebre que roncaba plácidamente. ¡La tortuga estaba tomando la delantera!",
+                text: "Confiada en su ventaja, Velox se acurrucó sobre el musgo fresco y se quedó profundamente dormida, soltando suaves ronquidos. Mientras tanto, la tortuga siguió caminando lento, pero sin pausa, decidida a no rendirse. Pronto, pasó silenciosamente junto a la liebre que dormía plácidamente. ¡La tortuga estaba tomando la delantera rumbo a la gran colina!",
                 question: "😱 ¿Qué debe hacer la tortuga al acercarse a la meta final?",
                 options: [
                     { text: "🤫 Cruzar la meta en silencio y ganar la carrera", next: "meta_clasica", sound: "win", style: "" },
@@ -256,7 +269,7 @@
                 tag: "Desenlace Clásico",
                 title: "¡Victoria de la Tortuga!",
                 emoji: "🎉🏆🐢",
-                text: "Los gritos de emoción de los animales despertaron a la liebre. Velox abrió los ojos y vio a la tortuga cruzando la meta. Había perdido por confiada. Moraleja: Ten una buena actitud, no te burles de los demás y sé más exitoso mediante la constancia y la disciplina que con acciones rápidas y descuidadas.",
+                text: "Los gritos de emoción de los animales despertaron a la liebre. Velox abrió los ojos, corrió desesperada, pero ya era tarde: la tortuga acababa de cruzar la meta. Moraleja: Ten una buena actitud, no te burles de los demás y sé más exitoso haciendo las cosas con constancia y disciplina que actuando de manera rápida y descuidadamente.",
                 question: "✨ ¿Qué camino deseas explorar ahora?",
                 options: [
                     { text: "🔄 Volver al inicio", next: "inicio", sound: "click", style: "btn-success" }
@@ -266,7 +279,7 @@
                 tag: "Desenlace Cooperativo",
                 title: "¡Cruzando de la Mano!",
                 emoji: "🤝🌟🎉",
-                text: "La tortuga decidió despertar a su compañera. Ambas llegaron a la meta juntas, compartiendo los aplausos del bosque. Aprendieron que el respeto, la empatía y el esfuerzo conjunto valen mucho más que una medalla individual.",
+                text: "La tortuga decidió despertar a su compañera en el último tramo. Ambas llegaron a la meta juntas, compartiendo los aplausos del bosque. Aprendieron que el respeto, la empatía y el esfuerzo conjunto valen mucho más que una medalla individual.",
                 question: "💖 ¡Un final lleno de valores y compañerismo!",
                 options: [
                     { text: "🔄 Volver al inicio", next: "inicio", sound: "click", style: "btn-success" }
@@ -296,8 +309,9 @@
             `;
         }
 
-        // Inicializar la primera escena
+        // Inicializar la primera escena al cargar la página
         renderScene('inicio');
     </script>
 </body>
 </html>
+
