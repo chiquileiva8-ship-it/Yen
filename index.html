@@ -231,7 +231,6 @@
         }
 
         const story = {
-            // INTERFAZ 1: PREGUNTA INICIAL SOBRE EL CUENTO
             preguntar_cuento: {
                 level: 0, tag: "¡Bienvenido Explorador!", title: "¿Conoces la historia?", emoji: "📖🐰🐢✨",
                 text: "¡Hola! Antes de adentrarnos en esta colorida aventura de 20 niveles en el Bosque del Arroyo Fresco, cuéntanos: ¿Conoces la famosa fábula de 'La liebre y la tortuga'?",
@@ -242,8 +241,6 @@
                     { text: "📚 No la conozco o quiero recordarla", next: "explicacion_cuento", sound: "click", damage: 0 }
                 ]
             },
-
-            // INTERFAZ 1.5: RESUMEN EXPLICATIVO SI NO CONOCE EL CUENTO
             explicacion_cuento: {
                 level: 0, tag: "Biblioteca del Búho", title: "Resumen de la Fábula", emoji: "📜🌲🐇",
                 text: "Había una vez una liebre muy vanidosa que presumía de su gran velocidad. Cansada de sus burlas, una tortuga lenta pero muy constante la retó a una carrera. La liebre corrió mucho, pero se confió tanto que se quedó dormida bajo un árbol, permitiendo que la tortuga constante cruzara la meta primero.",
@@ -253,8 +250,6 @@
                     { text: "🎯 ¡Sí, empezar Test Inicial!", next: "test_inicial", sound: "win", damage: 0 }
                 ]
             },
-
-            // INTERFAZ 2: TEST DIAGNÓSTICO
             test_inicial: {
                 level: 0, tag: "Evaluación Diagnóstica", title: "Test Inicial de Sabiduría", emoji: "📝🦉🧠",
                 text: "El Búho Sabio desea conocer tu opinión antes de arrancar los 20 niveles del desafío en el Bosque del Arroyo Fresco.",
@@ -279,12 +274,10 @@
                     { text: "D) Pido ayuda y colaboro en equipo", next: "inicio_juego", damage: 0 }
                 ]
             },
-
-            // INTERFAZ 3: JUEGO DE 20 NIVELES (4 CAMINOS POR NIVEL: 2 BUENOS, 2 MALOS)
             inicio_juego: {
                 level: 1, tag: "Nivel 1 de 20", title: "El Reto en el Prado", emoji: "🐇💬🐢",
                 text: "Contexto: Velox presume todo el día de su gran velocidad. Cansada de sus burlas, la tortuga Paciencia la reta a una carrera hasta la Colina de los Girasoles.",
-                hint: "🦉 Búho Sabio: Tienes 4 opciones. 2 son constructivas (seguras) y 2 conllevan riesgos y pérdida de vidas.",
+                hint: "🦉 Búho Sabio: Tienes 4 opciones. 2 son constructivas y 2 conllevan riesgos y pérdida de vidas.",
                 question: "🛤️ Elige tu camino estratégico para el Nivel 1:",
                 options: [
                     { text: "1. Vía de la Prisa Ciega (Correr sin calentar)", next: "n2_gen", sound: "hurt", damage: 1 },
@@ -293,8 +286,6 @@
                     { text: "4. Vía de la Empatía (Acuerdo pacífico)", next: "n2_gen", sound: "win", damage: 0 }
                 ]
             },
-
-            // NIVELES DINÁMICOS 2 AL 19 CON 4 OPCIONES
             n2_gen: { level: 2, tag: "Nivel 2 de 20", title: "El Puente Resbaloso", emoji: "🌉💧🪵", text: "Llegas a un arroyo con un puente mojado por la llovizna.", hint: "🦉 Búho Sabio: La precaución evita caídas innecesarias.", question: "🌊 ¿Cómo cruzas?", options: [
                 { text: "1. Cruzar corriendo sin mirar", next: "n3_gen", sound: "hurt", damage: 1 },
                 { text: "2. Saltar arriesgadamente", next: "n3_gen", sound: "hurt", damage: 1 },
@@ -381,7 +372,7 @@
             ]},
             n16_gen: { level: 16, tag: "Nivel 16 de 20", title: "La Curva del Viento", emoji: "💨🌻🌪️", text: "Fuertes vientos en la cima intentan desestabilizarte.", hint: "🦉 Búho Sabio: Inclina el cuerpo hacia adelante.", question: "🌬️ ¿Cómo vences la ráfaga?", options: [
                 { text: "1. Luchar de pie con soberbia", next: "n17_gen", sound: "hurt", damage: 1 },
-                { text: "2. Esperar sentado sentado", next: "n17_gen", sound: "hurt", damage: 1 },
+                { text: "2. Esperar sentado", next: "n17_gen", sound: "hurt", damage: 1 },
                 { text: "3. Agachar el cuerpo y avanzar", next: "n17_gen", sound: "win", damage: 0 },
                 { text: "4. Sujetarse de tallos de girasol", next: "n17_gen", sound: "win", damage: 0 }
             ]},
@@ -392,16 +383,14 @@
                 { text: "4. Esperar a la tortuga para cruzar tomados de la mano", next: "n18_gen", sound: "win", damage: 0 }
             ]},
             n18_gen: { level: 18, tag: "Nivel 18 de 20", title: "Evaluación de Obstáculos", emoji: "🧩🦉📋", text: "El Búho Sabio te hace una pregunta de control antes de la meta.", hint: "🦉 Búho Sabio: Recuerda los errores cometidos en el camino.", question: "❓ ¿Cuál fue tu mayor aprendizaje?", options: [
-                { text: "A) Que correr rápido soluciona todo", next: "n19_gen", sound: "hurt", damage: 1 },
-                { text: "B) Que la constancia y el respeto superan la vanidad", next: "n19_gen", sound: "win", damage: 0 },
-                { text: "C) Que dormir es mejor que competir", next: "n19_gen", sound: "hurt", damage: 1 },
-                { text: "D) Que la colaboración enriquece el logro", next: "n19_gen", sound: "win", damage: 0 }
+                { text: "1. Que correr rápido soluciona todo", next: "n19_gen", sound: "hurt", damage: 1 },
+                { text: "2. Que dormir es mejor que competir", next: "n19_gen", sound: "hurt", damage: 1 },
+                { text: "3. Que la constancia y el respeto superan la vanidad", next: "n19_gen", sound: "win", damage: 0 },
+                { text: "4. Que la colaboración enriquece el logro", next: "n19_gen", sound: "win", damage: 0 }
             ]},
             n19_gen: { level: 19, tag: "Nivel 19 de 20", title: "La Línea de Llegada", emoji: "🏆🎉🌻", text: "Has atravesado los 19 niveles previos sorteando decisiones y aprendizajes.", hint: "🦉 Búho Sabio: ¡Pulsa para generar tu reporte final!", question: "🌟 ¡Generar reporte pedagógico!", options: [
                 { text: "📊 Ver mi reporte de reflexión y aprendizaje", next: "pantalla_reflexion", sound: "win", damage: 0 }
             ]},
-
-            // INTERFAZ 4: REFLEXIÓN FINAL CON HISTORIAL
             pantalla_reflexion: {
                 level: 20, tag: "Nivel 20 de 20: Reflexión Final", title: "Reporte de Conciencia del Explorador", emoji: "📜🦉🎓",
                 text: "¡Felicidades por completar los 20 niveles! Tus decisiones reflejaron tu estilo de aprendizaje. La constancia, el respeto y la disciplina siempre superan a la vanidad.",
@@ -411,8 +400,6 @@
                     { text: "❤️ Reiniciar la aventura desde el Test Inicial", next: "reiniciar", sound: "win", damage: 0 }
                 ]
             },
-
-            // GAME OVER
             game_over: {
                 level: 20, tag: "¡Juego Terminado!", title: "Te has quedado sin vidas", emoji: "💀💔🌲",
                 text: "Tus decisiones basadas en la prisa, la soberbia o el descuido extremo agotaron tus 3 corazones. La constancia y la prudencia son indispensables.",
@@ -492,10 +479,10 @@
             `;
         }
 
-        // Iniciar en la Pregunta Inicial sobre el Cuento
         renderScene('preguntar_cuento', 0);
     </script>
 </body>
 </html>
+
 
 
